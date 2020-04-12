@@ -1,0 +1,247 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="ja" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="ja" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Ubuntu における netplan 設定メモ &mdash; tech-matome  ドキュメント</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> tech-matome
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Ubuntu 設定メモ</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">tech-matome</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Ubuntu における netplan 設定メモ</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/ubuntu/netplan.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ubuntu-netplan">
+<h1>Ubuntu における netplan 設定メモ<a class="headerlink" href="#ubuntu-netplan" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<div class="section" id="id1">
+<h2>はじめに<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>Ubuntu の基本的なネットワーク設定の個人的なメモです。</p>
+<p>ここでは、netplan の設定ファイルを書くことで、ubuntu の IP アドレス設定をします。</p>
+</div>
+<div class="section" id="id2">
+<h2>設定ファイルと内容<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>以下のディレクトリに、新しいファイル（ここでは <code class="docutils literal notranslate"><span class="pre">99-static.yaml</span></code> としました。）を作成します。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">netplan</span><span class="o">/</span><span class="mi">99</span><span class="o">-</span><span class="n">static</span><span class="o">.</span><span class="n">yaml</span>
+</pre></div>
+</div>
+<p>前後しますが、下記の例のように記入したら、次のコマンドを実行して反映してください。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">netplan</span> <span class="n">apply</span>
+</pre></div>
+</div>
+<div class="section" id="dhcp">
+<h3>DHCP を利用する設定例<a class="headerlink" href="#dhcp" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>作成した新しいファイルに、下記のような設定を記述します。値は適宜書き換えてください。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">network</span><span class="p">:</span>
+<span class="n">version</span><span class="p">:</span> <span class="mi">2</span>
+ <span class="n">renderer</span><span class="p">:</span> <span class="n">networkd</span>
+  <span class="n">ethernets</span><span class="p">:</span>
+    <span class="n">enp3s0</span><span class="p">:</span>                     <span class="c1"># interface 名</span>
+      <span class="n">dhcp4</span><span class="p">:</span> <span class="n">true</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="ip">
+<h3>IPアドレスを指定する設定例<a class="headerlink" href="#ip" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>アドレスを指定するときは、下記のような設定を記述します。値は適宜書き換えてください。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">network</span><span class="p">:</span>
+  <span class="n">version</span><span class="p">:</span> <span class="mi">2</span>
+  <span class="n">renderer</span><span class="p">:</span> <span class="n">networkd</span>
+  <span class="n">ethernets</span><span class="p">:</span>
+    <span class="n">enp3s0</span><span class="p">:</span>                     <span class="c1"># interface 名</span>
+      <span class="n">addresses</span><span class="p">:</span>
+        <span class="o">-</span> <span class="mf">10.10</span><span class="o">.</span><span class="mf">10.2</span><span class="o">/</span><span class="mi">24</span>
+      <span class="n">gateway4</span><span class="p">:</span> <span class="mf">10.10</span><span class="o">.</span><span class="mf">10.1</span>      <span class="c1"># DGW</span>
+      <span class="n">nameservers</span><span class="p">:</span>
+          <span class="n">search</span><span class="p">:</span> <span class="p">[</span><span class="n">mydomain</span><span class="p">,</span> <span class="n">otherdomain</span><span class="p">]</span>
+          <span class="n">addresses</span><span class="p">:</span> <span class="p">[</span><span class="mf">10.10</span><span class="o">.</span><span class="mf">10.1</span><span class="p">,</span> <span class="mf">1.1</span><span class="o">.</span><span class="mf">1.1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="netplan">
+<h3>netplan の設定について<a class="headerlink" href="#netplan" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>netplan はIPアドレスを設定する際に、 <code class="docutils literal notranslate"><span class="pre">/{lib,etc,run}/netplan</span></code> のディレクトリの下にあって、 <code class="docutils literal notranslate"><span class="pre">.yaml</span></code> で終わるファイルを取得します。ファイルが複数あるときは、辞書配列順に読み込まれ、同じ（mapping keys の）ものに対しての設定は、あとに読み込まれたものに書き換えられます。</p>
+<p>詳しくは、公式のドキュメントが詳しいので参照されたいです。</p>
+</div>
+<div class="section" id="id3">
+<h3>参照<a class="headerlink" href="#id3" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p><a class="reference external" href="https://netplan.io/reference">https://netplan.io/reference</a></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, ha-na-chan
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
