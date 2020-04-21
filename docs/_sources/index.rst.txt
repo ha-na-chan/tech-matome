@@ -22,6 +22,7 @@ https://github.com/ha-na-chan/tech-matome
 
    ubuntu/index
    security-p/index
+   tools/index
 
 
 Indices and tables

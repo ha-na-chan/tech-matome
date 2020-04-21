@@ -3,6 +3,7 @@
 
 .. toctree::
    :maxdepth: 2
+   :numbered:
 
    1.gaiyo
    2.eikyou
