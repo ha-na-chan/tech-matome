@@ -24,7 +24,6 @@ https://github.com/ha-na-chan/tech-matome
    security-p/index
    tools/index
 
-
 Indices and tables
 -------------------------
 

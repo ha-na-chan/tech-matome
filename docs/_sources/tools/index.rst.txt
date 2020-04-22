@@ -8,7 +8,9 @@ https://github.com/ha-na-chan/tech-matome
 
 .. toctree::
    :maxdepth: 2
-   
+   :numbered:
+
    httping
 
+ 
 
